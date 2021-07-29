@@ -149,9 +149,7 @@ def train(config,model,
         # Training loop
         for ii, (data, target) in enumerate(train_loader):
             # Tensors to gpu
-        
             data, target = data.to(device), target.to(device)
-
             # Clear gradients
             optimizer.zero_grad()
             # Predicted outputs are log probabilities
