@@ -34,7 +34,7 @@ from slowfastnet import SlowFast,Bottleneck
 from TrainTestCode import train,mapIntToClass,check_accuracy,getTop_k
 
 
-wandb.init(project="kids_model",config='config-default.yaml')
+run = wandb.init(project="kids_model",config='config-default.yaml')
 config = wandb.config
 age = config['age']
 # Printing out all outputs
@@ -53,6 +53,7 @@ n_classes = 21
 device = 'cuda'
 print(f'Device: {device}')
 
+
 # Number of gpus
 # %% [markdown]
 # # Create Data Loader for training and test split
@@ -63,14 +64,23 @@ We set the age paramater in config file to account for kid/adult training file a
 MyDataset is the custom file that handles the reading of the input videos as well as selecting the number of frames needed.
 We use wandb.ai to handle the visualization of our runs. Detailed tutorial on how to use it can be found on there website.
 """
-dataset_train = MyDataset(f'data/Data_Csv/TrainSplit-{age}.csv',f'className_{age}Train.json',mode='train',target_n_frames=config['target_n_frames'])
-dataset_val = MyDataset(f'data/Data_Csv/ValSplit-{age}.csv',f'className_{age}sVal.json',mode='val',target_n_frames=config['target_n_frames'])
-dataset_test = MyDataset(f'data/Data_Csv/TestSplit-{age}.csv',f'className_{age}Test.json',mode='test',target_n_frames=config['target_n_frames'])
+train_path = r'data\Data_Csv\train_mixed2.csv'
+val_path = f'data/Data_Csv/val_mixed.csv'
+test_path  = f'data/Data_Csv/test_mixed.csv'
+dataset_train = MyDataset(train_path,mode='train',target_n_frames=config['target_n_frames'])
+dataset_val = MyDataset(val_path,mode='val',target_n_frames=config['target_n_frames'])
+dataset_test = MyDataset(test_path,mode='test',target_n_frames=config['target_n_frames'])
 dataLoader = {
     'train':DataLoader(dataset_train,batch_size= batch_size,shuffle=True),
     'test': DataLoader(dataset_test,batch_size= batch_size,shuffle=True),
     'val':DataLoader(dataset_val,batch_size= batch_size,shuffle=True)
 }
+
+artifact = wandb.Artifact('my-dataset', type='dataset')
+artifact.add_file(train_path)
+artifact.add_file(val_path)
+artifact.add_file(test_path)
+run.log_artifact(artifact)
 
 
 # %% [markdown]
