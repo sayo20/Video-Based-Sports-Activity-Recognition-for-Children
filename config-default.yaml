@@ -13,7 +13,7 @@ patience:
   value: 80
 age:
   desc: adult or kids
-  value: 'adults'
+  value: 'kids'
 checkpoint_path:
   desc: Path to model checkpoint, if false train from scratch
   value: False
