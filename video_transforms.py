@@ -6,7 +6,7 @@ import imgaug.augmenters as iaa
 import coloredlogs, logging
 coloredlogs.install()
 
-
+Originaaly written by: https://github.com/alexandrosstergiou/Squeeze-and-Recursion-Temporal-Gates/blob/master/data/video_transforms.py
 
 '''
 ===  S T A R T  O F  C L A S S  C O M P O S E ===
