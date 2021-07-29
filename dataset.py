@@ -15,7 +15,7 @@ Custom class to handle the reading of input data, selecting the number of frames
 """
 
 class MyDataset(Dataset):
-    def __init__(self,dataset_path,json_className,
+    def __init__(self,dataset_path,
         clip_length=8,
         clip_size=256,
         val_clip_length=None,
@@ -34,9 +34,9 @@ class MyDataset(Dataset):
         # self.df = self.df[self.df['Action Label']=='hitting baseball_kid']
         self.classes = sorted(self.df["Action Label"].unique()) # List of unique class names
         self.class_to_idx = {j: i for i, j in enumerate(self.classes)}
-
-        with open(json_className, 'w') as fp:
-            json.dump(self.class_to_idx, fp)
+        
+        # with open(json_className, 'w') as fp:
+        #     json.dump(self.class_to_idx, fp)
 
         sometimes_aug = lambda aug: iaa.Sometimes(0.4, aug)
         sometimes_seq = lambda aug: iaa.Sometimes(0.9, aug)
@@ -68,18 +68,12 @@ class MyDataset(Dataset):
                             normalise=[mean,std]
                         )
         else:
-            # self.video_transform = transforms.Compose(
-            #                             transforms=iaa.Sequential([
-            #                                 iaa.Resize({"shorter-side": 294, "longer-side":"keep-aspect-ratio"}),
-            #                                 iaa.CropToFixedSize(width=294, height=294, position='center'),
-            #                                 iaa.CropToFixedSize(width=clip_size, height=clip_size, position='center')
-            #                             ]),
-            #                             normalise=[mean,std])
-            self.video_transform = transforms.Compose(
+     
+            self.video_transform=transforms.Compose(
                                         transforms=iaa.Sequential([
-                                            iaa.Resize({"shorter-side": 384, "longer-side":"keep-aspect-ratio"}),
-                                        iaa.CropToFixedSize(width=384, height=384, position='center'),
-                                        iaa.CropToFixedSize(width=clip_size, height=clip_size, position='center')
+                                            iaa.Resize({"shorter-side": 294, "longer-side":"keep-aspect-ratio"}),
+                                            iaa.CropToFixedSize(width=294, height=294, position='center'),
+                                            iaa.CropToFixedSize(width=256, height=256, position='center')
                                         ]),
                                         normalise=[mean,std])
 
@@ -124,7 +118,12 @@ class MyDataset(Dataset):
         video = np.load(path_pt)
         video = self.video_transform(video,self.end_size)
 
-
-
         return video,label
+
+
+
+
+
+
+
 
