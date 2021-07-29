@@ -143,6 +143,10 @@ def predict(dataLoader, model, jsonfile):
 
 
 # %%
+"""
+We evaluate all of trained model on both the Adult and Kid test split.
+To access the checkpoints, kindly send an email to lizfeyisayo@gmail.com
+"""
 
 settings = [
     {"model_name":"Adult-SpecificModel", "age":"adults","checkpoint":"model_save\checkpoint_vibrant-waterfall-67_adults.pt","test":"data/Data_Csv/TestSplit-adults.csv"},
