@@ -5,6 +5,6 @@ Over the years, deep learning models have been able to record state-of-the- art 
 
 Full thesis can be found here: 
 
-##Code Base
+## Code Base
 1. SlowFastNet-ResNet: This file contains the implementation of the slowfast architecture used in this study (we use ResNet50). You can request the pre-trained weights by sending an email to lizfeyisayo@gmail.com. 
 2. 
