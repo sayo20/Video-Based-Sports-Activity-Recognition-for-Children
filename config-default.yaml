@@ -1,0 +1,25 @@
+  
+epochs:
+  desc: Number of epochs to train over
+  value: 50
+batch_size:
+  desc: Size of each mini-batch
+  value: 32
+lr:
+  desc: We use LR decay that starts with this value
+  value: 0.01 # Had used 0.01 as scratch
+patience:
+  desc: Patience for scheduler
+  value: 80
+age:
+  desc: adult or kids
+  value: 'adults'
+checkpoint_path:
+  desc: Path to model checkpoint, if false train from scratch
+  value: False
+max_epochs_stop:
+  desc: How many epochs no improvement before early stop
+  value: 12
+target_n_frames:
+  desc: N frames target
+  value: 40
