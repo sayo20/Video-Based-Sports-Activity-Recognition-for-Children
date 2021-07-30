@@ -7,4 +7,6 @@ Full thesis can be found here:
 
 ## Code Base
 1. slowfastnet.py: This file contains the implementation of the slowfast architecture used in this study (we use ResNet50). You can request the pre-trained weights by sending an email to lizfeyisayo@gmail.com. 
-2. 
+2. train_model.py: Code to train all the models described in this work. It calls the SlowFast-ResNet50 from slowfast.py. Also, it performs data transformations using the custom MyDataset class defined in dataset.py. The training function is called from TrainTestCode.py.
+3. config-default.yaml: Training configurations used as well as parameters set on wandb.ai
+4. Evaluation.py: Runs the test set on each of the models using the saved checkpoints. Checkpoints can be found here: 
